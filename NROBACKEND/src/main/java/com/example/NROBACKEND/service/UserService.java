@@ -27,4 +27,17 @@ public class UserService {
     public boolean existsByUsername(String username) {
         return userRepository.existsByUsername(username);
     }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public void updateVangNgoc(String username, Long vang, Long ngoc) {
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            user.setVang(vang);
+            user.setNgoc(ngoc);
+            userRepository.save(user);
+        }
+    }
 }

@@ -16,7 +16,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    // getters và setters
+    private Long vang = 0L; // vàng
+    private Long ngoc = 0L; // ngọc
+
+    // ===== Getters & Setters =====
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -25,4 +28,10 @@ public class User {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public Long getVang() { return vang; }
+    public void setVang(Long vang) { this.vang = vang; }
+
+    public Long getNgoc() { return ngoc; }
+    public void setNgoc(Long ngoc) { this.ngoc = ngoc; }
 }

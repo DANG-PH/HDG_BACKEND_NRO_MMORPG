@@ -81,48 +81,48 @@ public class AuthController {
     }
 
     @PostMapping("/useVangNapTuWeb")
-    public ResponseEntity<String> useVangNapTuWeb(@RequestBody Map<String, Object> request) {
+    public ResponseEntity<Map<String, Object>> useVangNapTuWeb(@RequestBody Map<String, Object> request) {
         String username = (String) request.get("username");
         int amount = (int) request.get("amount");
 
         User found = userService.findByUsername(username);
         if (found == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User không tồn tại!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "User không tồn tại!"));
         }
 
         if (found.getVangNapTuWeb() < amount) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Không đủ vàng nạp!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "Không đủ vàng nạp!"));
         }
 
-        // trừ vàng nạp và cộng vào vàng thường
+        // chỉ trừ vàng nạp
         found.setVangNapTuWeb(found.getVangNapTuWeb() - amount);
-        found.setVang(found.getVang() + amount);
-
         userService.saveUser(found);
 
-        return ResponseEntity.ok("Đổi thành công " + amount + " vàng nạp!");
+        return ResponseEntity.ok(Map.of("used", amount));
     }
 
     @PostMapping("/useNgocNapTuWeb")
-    public ResponseEntity<String> useNgocNapTuWeb(@RequestBody Map<String, Object> request) {
+    public ResponseEntity<Map<String, Object>> useNgocNapTuWeb(@RequestBody Map<String, Object> request) {
         String username = (String) request.get("username");
         int amount = (int) request.get("amount");
 
         User found = userService.findByUsername(username);
         if (found == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User không tồn tại!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "User không tồn tại!"));
         }
 
         if (found.getNgocNapTuWeb() < amount) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Không đủ ngọc nạp!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "Không đủ ngọc nạp!"));
         }
 
-        // trừ ngọc nạp và cộng vào ngọc thường
+        // chỉ trừ ngọc nạp
         found.setNgocNapTuWeb(found.getNgocNapTuWeb() - amount);
-        found.setNgoc(found.getNgoc() + amount);
-
         userService.saveUser(found);
 
-        return ResponseEntity.ok("Đổi thành công " + amount + " ngọc nạp!");
+        return ResponseEntity.ok(Map.of("used", amount));
     }
 }

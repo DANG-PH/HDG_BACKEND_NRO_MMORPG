@@ -18,6 +18,10 @@ public class User {
 
     private Long vang = 0L; // vàng
     private Long ngoc = 0L; // ngọc
+    private Long sucManh = 2000L;
+    private Long vangNapTuWeb = 0L; // vàng nạp từ web
+    private Long ngocNapTuWeb = 0L; // ngọc nạp từ web
+
 
     // ===== Getters & Setters =====
     public Long getId() { return id; }
@@ -34,4 +38,13 @@ public class User {
 
     public Long getNgoc() { return ngoc; }
     public void setNgoc(Long ngoc) { this.ngoc = ngoc; }
+
+    public Long getVangNapTuWeb() { return vangNapTuWeb; }
+    public void setVangNapTuWeb(Long vang) { this.vangNapTuWeb = vang; }
+
+    public Long getNgocNapTuWeb() { return ngocNapTuWeb; }
+    public void setNgocNapTuWeb(Long ngoc) { this.ngocNapTuWeb = ngoc; }
+
+    public Long getSucManh() { return sucManh; }
+    public void setSucManh(Long sm) { this.sucManh = sm; }
 }

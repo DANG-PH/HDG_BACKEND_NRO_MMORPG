@@ -125,4 +125,96 @@ public class AuthController {
 
         return ResponseEntity.ok(Map.of("used", amount));
     }
+
+    // API mới để cập nhật balance khi nạp tiền
+    @PostMapping("/updateBalance")
+    public ResponseEntity<Map<String, Object>> updateBalance(@RequestBody Map<String, Object> request) {
+        String username = (String) request.get("username");
+        String type = (String) request.get("type");
+        long amount = (long) request.get("amount");
+
+        User found = userService.findByUsername(username);
+        if (found == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "User không tồn tại!"));
+        }
+
+        try {
+            if ("vangNapTuWeb".equals(type)) {
+                found.setVangNapTuWeb(amount);
+            } else if ("ngocNapTuWeb".equals(type)) {
+                found.setNgocNapTuWeb(amount);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(Map.of("error", "Loại balance không hợp lệ!"));
+            }
+
+            userService.saveUser(found);
+
+            return ResponseEntity.ok(Map.of(
+                    "message", "Cập nhật balance thành công!",
+                    "vangNapTuWeb", found.getVangNapTuWeb(),
+                    "ngocNapTuWeb", found.getNgocNapTuWeb()
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Lỗi khi cập nhật balance!"));
+        }
+    }
+
+    // API để thêm vàng nạp từ web (dùng cho nạp tiền)
+    @PostMapping(value = "/addVangNapTuWeb", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Map<String, Object>> addVangNapTuWeb(@RequestBody Map<String, Object> request) {
+        String username = (String) request.get("username");
+        int amount = (int) request.get("amount");
+
+        User found = userService.findByUsername(username);
+        if (found == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "User không tồn tại!"));
+        }
+
+        if (amount <= 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "Số tiền phải lớn hơn 0!"));
+        }
+
+        // Cộng thêm vàng nạp
+        found.setVangNapTuWeb(found.getVangNapTuWeb() + amount);
+        userService.saveUser(found);
+
+        return ResponseEntity.ok(Map.of(
+                "message", "Nạp vàng thành công!",
+                "added", amount,
+                "totalVangNapTuWeb", found.getVangNapTuWeb()
+        ));
+    }
+
+    // API để thêm ngọc nạp từ web (dùng cho nạp tiền)
+    @PostMapping(value = "/addNgocNapTuWeb", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Map<String, Object>> addNgocNapTuWeb(@RequestBody Map<String, Object> request) {
+        String username = (String) request.get("username");
+        int amount = (int) request.get("amount");
+
+        User found = userService.findByUsername(username);
+        if (found == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "User không tồn tại!"));
+        }
+
+        if (amount <= 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("error", "Số tiền phải lớn hơn 0!"));
+        }
+
+        // Cộng thêm ngọc nạp
+        found.setNgocNapTuWeb(found.getNgocNapTuWeb() + amount);
+        userService.saveUser(found);
+
+        return ResponseEntity.ok(Map.of(
+                "message", "Nạp ngọc thành công!",
+                "added", amount,
+                "totalNgocNapTuWeb", found.getNgocNapTuWeb()
+        ));
+    }
 }

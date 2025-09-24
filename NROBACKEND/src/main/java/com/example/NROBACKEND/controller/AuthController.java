@@ -34,6 +34,10 @@ public class AuthController {
         if (found == null || !found.getPassword().equals(user.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+        if (!found.isDaVaoTaiKhoanLanDau()) {
+            found.setDaVaoTaiKhoanLanDau(true);
+            userService.saveUser(found);
+        }
         return ResponseEntity.ok(found); // login ok
     }
 
@@ -49,6 +53,9 @@ public class AuthController {
         found.setVang(user.getVang());
         found.setNgoc(user.getNgoc());
         found.setSucManh(user.getSucManh());
+        found.setX(user.getX());
+        found.setY(user.getY());
+        found.setMapHienTai(user.getMapHienTai());
 
         userService.saveUser(found);
 

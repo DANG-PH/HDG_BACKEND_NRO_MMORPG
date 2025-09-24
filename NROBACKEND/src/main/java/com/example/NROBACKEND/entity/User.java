@@ -22,6 +22,12 @@ public class User {
     private Long vangNapTuWeb = 0L; // vàng nạp từ web
     private Long ngocNapTuWeb = 0L; // ngọc nạp từ web
 
+    private Float x = 100f;
+    private Float y = 175f;
+
+    private String mapHienTai = "Nhà Gôhan";
+
+    private boolean daVaoTaiKhoanLanDau = false;
 
     // ===== Getters & Setters =====
     public Long getId() { return id; }
@@ -47,4 +53,21 @@ public class User {
 
     public Long getSucManh() { return sucManh; }
     public void setSucManh(Long sm) { this.sucManh = sm; }
+
+    public Float getX() { return x; }
+    public void setX(Float x) { this.x = x; }
+
+    public Float getY() { return y; }
+    public void setY(Float y) { this.y = y; }
+
+    public String getMapHienTai() { return mapHienTai; }
+    public void setMapHienTai(String mapHienTai) { this.mapHienTai = mapHienTai; }
+
+    public boolean isDaVaoTaiKhoanLanDau() {
+        return daVaoTaiKhoanLanDau;
+    }
+
+    public void setDaVaoTaiKhoanLanDau(boolean daVaoTaiKhoanLanDau) {
+        this.daVaoTaiKhoanLanDau = daVaoTaiKhoanLanDau;
+    }
 }

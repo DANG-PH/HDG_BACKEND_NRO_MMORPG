@@ -1,6 +1,7 @@
 package com.example.NROBACKEND.entity;
 
 import jakarta.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -28,6 +29,10 @@ public class User {
     private String mapHienTai = "Nhà Gôhan";
 
     private boolean daVaoTaiKhoanLanDau = false;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @com.fasterxml.jackson.annotation.JsonManagedReference
+    private List<Item> items = new ArrayList<>();
 
     // ===== Getters & Setters =====
     public Long getId() { return id; }
@@ -70,4 +75,7 @@ public class User {
     public void setDaVaoTaiKhoanLanDau(boolean daVaoTaiKhoanLanDau) {
         this.daVaoTaiKhoanLanDau = daVaoTaiKhoanLanDau;
     }
+
+    public List<Item> getItems() { return items; }
+    public void setItems(List<Item> items) { this.items = items; }
 }

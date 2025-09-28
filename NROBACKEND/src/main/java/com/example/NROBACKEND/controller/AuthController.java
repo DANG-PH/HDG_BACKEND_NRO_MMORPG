@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import java.util.*;
+//import com.example.NROBACKEND.entity.DeTu;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -56,6 +58,10 @@ public class AuthController {
         found.setX(user.getX());
         found.setY(user.getY());
         found.setMapHienTai(user.getMapHienTai());
+        found.setCoDeTu(user.isCoDeTu());
+        if (found.isCoDeTu()) {
+            found.setSucManhDeTu(user.getSucManhDeTu());
+        }
 
         userService.saveUser(found);
 

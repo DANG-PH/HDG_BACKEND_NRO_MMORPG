@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/NROBACKEND.iml" filepath="$PROJECT_DIR$/.idea/NROBACKEND.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/HDG_BACKEND_NRO_MMORPG.iml" filepath="$PROJECT_DIR$/.idea/HDG_BACKEND_NRO_MMORPG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NROBACKEND/NROBACKEND.iml" filepath="$PROJECT_DIR$/NROBACKEND/NROBACKEND.iml" />
     </modules>
   </component>
 </project>

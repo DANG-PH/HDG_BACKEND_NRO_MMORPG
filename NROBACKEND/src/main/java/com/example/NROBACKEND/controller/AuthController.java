@@ -224,4 +224,10 @@ public class AuthController {
                 "totalNgocNapTuWeb", found.getNgocNapTuWeb()
         ));
     }
+
+    @GetMapping("/top10")
+    public ResponseEntity<List<User>> getTop10Users() {
+        List<User> topUsers = userService.getTop10UsersBySucManh();
+        return ResponseEntity.ok(topUsers);
+    }
 }

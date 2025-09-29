@@ -1,0 +1,19 @@
+[33m1af9d94[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{0}: rebase (finish): returning to refs/heads/master
+[33m1af9d94[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m HEAD@{1}: rebase (start): checkout HEAD~5
+[33m6c9ee51[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{2}: commit (merge): chức năng nạp từ web qua database
+[33mf0f5337[m HEAD@{3}: reset: moving to HEAD
+[33mf0f5337[m HEAD@{4}: reset: moving to HEAD
+[33mf0f5337[m HEAD@{5}: reset: moving to HEAD
+[33mf0f5337[m HEAD@{6}: commit: lỗi
+[33mc24ba3b[m[33m ([m[1;32mthanh-base[m[33m)[m HEAD@{7}: merge thanh-base: Fast-forward
+[33m535d1d3[m HEAD@{8}: checkout: moving from thanh-base to master
+[33mc24ba3b[m[33m ([m[1;32mthanh-base[m[33m)[m HEAD@{9}: commit: code lỗi
+[33mdd779dc[m HEAD@{10}: checkout: moving from master to thanh-base
+[33m535d1d3[m HEAD@{11}: checkout: moving from thanh-base to master
+[33mdd779dc[m HEAD@{12}: commit: code test
+[33m535d1d3[m HEAD@{13}: checkout: moving from master to thanh-base
+[33m535d1d3[m HEAD@{14}: pull: Fast-forward
+[33mff0346c[m HEAD@{15}: checkout: moving from thanh-test to master
+[33m07ec795[m HEAD@{16}: commit: test login
+[33mff0346c[m HEAD@{17}: checkout: moving from master to thanh-test
+[33mff0346c[m HEAD@{18}: clone: from https://github.com/DANG-PH/HDG_BACKEND_NRO_MMORPG.git

@@ -4,6 +4,7 @@ import com.example.NROBACKEND.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import  java.util.*;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
@@ -31,4 +32,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // Spring không dựa vào tên method nữa, mà chạy đúng query mình viết.
     // Query này tương đương SQL:
     // SELECT * FROM users WHERE username = ?;
+
+
+    List<User> findTop10ByOrderBySucManhDesc();
+
 }

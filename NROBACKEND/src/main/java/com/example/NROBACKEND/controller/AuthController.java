@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import java.util.*;
-//import com.example.NROBACKEND.entity.DeTu;
+import com.example.NROBACKEND.entity.DeTu;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
@@ -58,9 +58,17 @@ public class AuthController {
         found.setX(user.getX());
         found.setY(user.getY());
         found.setMapHienTai(user.getMapHienTai());
-        found.setCoDeTu(user.isCoDeTu());
+        found.setCoDeTu(user.isCoDeTu() && user.getDeTu() != null);
         if (found.isCoDeTu()) {
-            found.setSucManhDeTu(user.getSucManhDeTu());
+            if (found.getDeTu() != null) {
+                // update lại dữ liệu cho đệ tử cũ
+                found.getDeTu().setSucManh(user.getDeTu().getSucManh());
+            } else {
+                // lần đầu tạo đệ tử
+                DeTu newDeTu = user.getDeTu();
+                newDeTu.setUser(found);
+                found.setDeTu(newDeTu);
+            }
         }
 
         userService.saveUser(found);

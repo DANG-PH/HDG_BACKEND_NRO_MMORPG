@@ -75,10 +75,6 @@ public class ItemController {
     @Transactional
     public ResponseEntity<?> addItems(@PathVariable String username, @RequestBody List<Item> items) {
         try {
-            System.out.println(">>> Nhận items từ client:");
-            for (Item item : items) {
-                System.out.println("maItem=" + item.getMaItem() + ", chiso=" + item.getChiso());
-            }
             User user = userService.findByUsername(username);
             if (user == null) {
                 return ResponseEntity.badRequest().body("User không tồn tại!");

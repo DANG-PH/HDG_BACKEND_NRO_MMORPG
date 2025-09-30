@@ -32,16 +32,16 @@ public class User {
 
     private boolean coDeTu = false;
 
-    // de tu
-    private Long sucManhDeTu = 2000L;
+//    // de tu
+//    private Long sucManhDeTu = 2000L;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @com.fasterxml.jackson.annotation.JsonManagedReference
     private List<Item> items = new ArrayList<>();
-//
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @com.fasterxml.jackson.annotation.JsonManagedReference
-//    private DeTu deTu; // null nếu chưa có đệ
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @com.fasterxml.jackson.annotation.JsonManagedReference
+    private DeTu deTu; // null nếu chưa có đệ
 
     // ===== Getters & Setters =====
     public Long getId() { return id; }
@@ -68,8 +68,8 @@ public class User {
     public Long getSucManh() { return sucManh; }
     public void setSucManh(Long sm) { this.sucManh = sm; }
 
-    public Long getSucManhDeTu() { return sucManhDeTu; }
-    public void setSucManhDeTu(Long sm) { this.sucManhDeTu = sm; }
+//    public Long getSucManhDeTu() { return sucManhDeTu; }
+//    public void setSucManhDeTu(Long sm) { this.sucManhDeTu = sm; }
 
 
     public Float getX() { return x; }
@@ -95,8 +95,8 @@ public class User {
         this.coDeTu = coDeTu;
     }
 
-//    public DeTu getDeTu() {return deTu;}
-//    public void setDeTu(DeTu deTu) {this.deTu = deTu;}
+    public DeTu getDeTu() {return deTu;}
+    public void setDeTu(DeTu deTu) {this.deTu = deTu;}
 
     public List<Item> getItems() { return items; }
     public void setItems(List<Item> items) { this.items = items; }

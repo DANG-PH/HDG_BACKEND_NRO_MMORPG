@@ -45,4 +45,12 @@ public class UserService {
             userRepository.save(user);
         }
     }
+
+    public List<User> getTop10UsersBySucManh() {
+        return userRepository.findTop10ByOrderBySucManhDesc();
+    }
+
+    public List<User> getTop10UsersByVang() {
+        return userRepository.findTop10ByOrderByVangDesc();
+    }
 }

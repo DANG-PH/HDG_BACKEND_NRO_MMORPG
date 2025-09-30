@@ -252,4 +252,59 @@ public class AuthController {
         List<User> users = userService.getTop10UsersByVang();
         return ResponseEntity.ok(users);
     }
+
+    @PostMapping("/banUser")
+    public ResponseEntity<String> banUser(@RequestParam String username, @RequestParam String adminName) {
+        User admin = userService.findByUsername(adminName);
+        if (admin == null || !"ADMIN".equals(admin.getRole())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Bạn không có quyền!");
+        }
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Không tìm thấy user!");
+        }
+        user.setBiBan(true);
+        userService.saveUser(user);
+        return ResponseEntity.ok("Đã ban user " + username);
+    }
+
+    @PostMapping("/updateRole")
+    public ResponseEntity<String> updateRole(
+            @RequestParam String username,
+            @RequestParam String newRole,
+            @RequestParam String adminName) {
+
+        User admin = userService.findByUsername(adminName);
+        if (admin == null || !"ADMIN".equals(admin.getRole())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Bạn không có quyền đổi role!");
+        }
+
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Không tìm thấy user!");
+        }
+
+        user.setRole(newRole.toUpperCase());
+        userService.saveUser(user);
+
+        return ResponseEntity.ok("Đã cập nhật role của " + username + " thành " + newRole);
+    }
+
+    @PostMapping("/unbanUser")
+    public ResponseEntity<String> unbanUser(@RequestParam String username, @RequestParam String adminName) {
+        User admin = userService.findByUsername(adminName);
+        if (admin == null || !"ADMIN".equals(admin.getRole())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Bạn không có quyền!");
+        }
+
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Không tìm thấy user!");
+        }
+
+        user.setBiBan(false);
+        userService.saveUser(user);
+
+        return ResponseEntity.ok("Đã unban user " + username);
+    }
 }

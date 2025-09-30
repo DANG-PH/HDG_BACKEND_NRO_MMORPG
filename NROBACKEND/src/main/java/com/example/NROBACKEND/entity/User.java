@@ -15,6 +15,9 @@ public class User {
     private String username;
 
     @Column(nullable = false)
+    private boolean biBan = false;
+    private String role = "USER";
+
     private String password;
 
     private Long vang = 0L; // vàng
@@ -100,4 +103,18 @@ public class User {
 
     public List<Item> getItems() { return items; }
     public void setItems(List<Item> items) { this.items = items; }
+
+    public boolean isBiBan() {
+        return biBan;
+    }
+    public void setBiBan(boolean biBan) {
+        this.biBan = biBan;
+    }
+
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

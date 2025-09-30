@@ -238,4 +238,18 @@ public class AuthController {
                 "totalNgocNapTuWeb", found.getNgocNapTuWeb()
         ));
     }
+
+    // API: Top 10 sức mạnh
+    @GetMapping("/top10/sucmanh")
+    public ResponseEntity<List<User>> getTop10BySucManh() {
+        List<User> users = userService.getTop10UsersBySucManh();
+        return ResponseEntity.ok(users);
+    }
+
+    // API: Top 10 vàng
+    @GetMapping("/top10/vang")
+    public ResponseEntity<List<User>> getTop10ByVang() {
+        List<User> users = userService.getTop10UsersByVang();
+        return ResponseEntity.ok(users);
+    }
 }

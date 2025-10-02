@@ -307,4 +307,49 @@ public class AuthController {
 
         return ResponseEntity.ok("Đã unban user " + username);
     }
+
+    // ===== API thêm vật phẩm từ web vào danh sách của user =====
+    @PostMapping("/addItemWeb")
+    public ResponseEntity<?> addItemWeb(@RequestParam String username, @RequestParam int itemId) {
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User không tồn tại!");
+        }
+
+        user.themVatPhamWeb(itemId);
+        userService.saveUser(user);
+
+        return ResponseEntity.ok("Đã thêm item " + itemId + " cho user " + username);
+    }
+
+    // ===== API lấy danh sách vật phẩm web của user =====
+    @GetMapping("/getItemsWeb")
+    public ResponseEntity<?> getItemsWeb(@RequestParam String username) {
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User không tồn tại!");
+        }
+
+        return ResponseEntity.ok(user.getDanhSachVatPhamWeb());
+    }
+
+    // ===== API sử dụng (trừ bớt) 1 item web =====
+    @PostMapping("/useItemWeb")
+    public ResponseEntity<?> useItemWeb(@RequestParam String username, @RequestParam int itemId) {
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User không tồn tại!");
+        }
+
+        List<Integer> ds = user.getDanhSachVatPhamWeb();
+        if (!ds.contains(itemId)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User không có item " + itemId);
+        }
+
+        // xoá 1 lần xuất hiện của itemId
+        ds.remove((Integer) itemId);
+        userService.saveUser(user);
+
+        return ResponseEntity.ok("Đã sử dụng item " + itemId + " cho user " + username);
+    }
 }

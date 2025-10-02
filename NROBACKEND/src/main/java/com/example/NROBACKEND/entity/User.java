@@ -35,6 +35,8 @@ public class User {
 
     private boolean coDeTu = false;
 
+    private final List<Integer> danhSachVatPhamWeb = new ArrayList<>();
+
 //    // de tu
 //    private Long sucManhDeTu = 2000L;
 
@@ -116,5 +118,10 @@ public class User {
     }
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<Integer> getDanhSachVatPhamWeb() { return danhSachVatPhamWeb; }
+    public void themVatPhamWeb(int id) {
+        this.danhSachVatPhamWeb.add(id);
     }
 }
